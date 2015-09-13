@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:NSFileManagerDemo/NSFileManagerDemo.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:NSUserDefaultsDemo/NSUserDefaultsDemo.xcodeproj">
    </FileRef>
    <FileRef
