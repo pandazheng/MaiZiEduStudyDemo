@@ -21,32 +21,44 @@ class ViewController: UIViewController {
         //移动文件
         var testPath = NSHomeDirectory().stringByAppendingPathComponent("string.txt")
         var destation = NSHomeDirectory().stringByAppendingPathComponent("test").stringByAppendingPathComponent("string.txt")
-        NSFileManager.defaultManager().moveItemAtPath(testPath, toPath: destation, error: nil)
+        do {
+            try NSFileManager.defaultManager().moveItemAtPath(testPath, toPath: destation)
+        } catch _ {
+        }
         //拷贝文件
         var copyPath = NSHomeDirectory().stringByAppendingPathComponent("test").stringByAppendingPathComponent("string2.txt")
-        NSFileManager.defaultManager().copyItemAtPath(destation, toPath: copyPath, error: nil)
-        //删除文件
-        NSFileManager.defaultManager().removeItemAtPath(copyPath, error: nil)
+        do {
+            try NSFileManager.defaultManager().copyItemAtPath(destation, toPath: copyPath)
+        } catch _ {
+        }
+        do {
+            //删除文件
+            try NSFileManager.defaultManager().removeItemAtPath(copyPath)
+        } catch _ {
+        }
         //查找文件
-        var finds = NSFileManager.defaultManager().contentsOfDirectoryAtPath(NSHomeDirectory().stringByAppendingPathComponent("test"), error: nil)
-        println(finds!)
+        var finds = try? NSFileManager.defaultManager().contentsOfDirectoryAtPath(NSHomeDirectory().stringByAppendingPathComponent("test"))
+        print(finds!)
         
         
-        var findUrls = NSFileManager.defaultManager().contentsOfDirectoryAtURL(NSURL(string: NSHomeDirectory().stringByAppendingPathComponent("test"))!, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles, error: nil)
-        println("\(findUrls!)")
+        var findUrls = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(NSURL(string: NSHomeDirectory().stringByAppendingPathComponent("test"))!, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles)
+        print("\(findUrls!)")
         
         var findUrl = findUrls?.first as! NSURL
         
         var urlPath : AnyObject? = nil
-        findUrl.getResourceValue(&urlPath, forKey: kCFURLPathKey as! String, error: nil)
-        println("\(urlPath!)")
+        do {
+            try findUrl.getResourceValue(&urlPath, forKey: kCFURLPathKey as! String)
+        } catch _ {
+        }
+        print("\(urlPath!)")
         //检测文件
         findFile()
     }
     
     func findFile() {
-        var exist = NSFileManager.defaultManager().fileExistsAtPath(NSHomeDirectory().stringByAppendingPathComponent("test").stringByAppendingPathComponent("string.txt"))
-        println("文件存在:\(exist)")
+        let exist = NSFileManager.defaultManager().fileExistsAtPath(NSHomeDirectory().stringByAppendingPathComponent("test").stringByAppendingPathComponent("string.txt"))
+        print("文件存在:\(exist)")
     }
     
     func createFile() {
@@ -54,13 +66,16 @@ class ViewController: UIViewController {
         var fileManager = NSFileManager.defaultManager()
         fileManager.createFileAtPath(filePath, contents: nil, attributes: nil)
         
-        var attributes = fileManager.attributesOfItemAtPath(filePath, error: nil)
-        println("文件属性: \(attributes!)")
+        var attributes = try? fileManager.attributesOfItemAtPath(filePath)
+        print("文件属性: \(attributes!)")
         
         
         var string: NSString = "测试"
         var testPath = NSHomeDirectory().stringByAppendingPathComponent("string.txt")
-        string.writeToFile(testPath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+        do {
+            try string.writeToFile(testPath, atomically: true, encoding: NSUTF8StringEncoding)
+        } catch _ {
+        }
         
         var imagePath = NSHomeDirectory().stringByAppendingPathComponent("image.jpg")
         var catImage : UIImage = UIImage(named: "cat.jpg")!

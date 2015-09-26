@@ -159,6 +159,7 @@
 		A4CB7C8F1BA5124B00640ECB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = pandazheng;
 				TargetAttributes = {
@@ -415,6 +416,7 @@
 				A4CB7CB81BA5124B00640ECB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4CB7CB91BA5124B00640ECB /* Build configuration list for PBXNativeTarget "NSUserDefaultsDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +425,7 @@
 				A4CB7CBB1BA5124B00640ECB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
